@@ -5,9 +5,7 @@ type Data = {
   name: string
 }
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { body } = req;
+  return res.send(`Hello ${body.name}, you just parsed the request body!`);
 }
