@@ -27,7 +27,7 @@ const AddComment = (props: IAddCommentProps) => {
     try {
       await axios.post('api/auth/comments/add', {message: message})
       .then((res) => console.log(res))
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
     } catch (error) {
       if (error instanceof AxiosError) {
         setError('message', {message: error?.message})
