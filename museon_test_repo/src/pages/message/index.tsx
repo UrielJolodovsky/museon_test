@@ -1,19 +1,29 @@
-import * as React from "react";
 import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { MessageProps } from "@/types";
 
 export interface IMessageProps { }
 
 export default function Message(props: IMessageProps) {
+
+  const [messages, setMessages] = useState<MessageProps[]>([])
+
+  useEffect(() => {
+    viewMessages()
+    console.log(messages)
+  }, [])
 
   const { setError } = useForm()
 
   const viewMessages = async () => {
     try {
 
-      const messages = await axios.get('api/comments/get')
-        .then((res) => console.log(res))
-
+      await axios.get('api/comments/get')
+        .then((res) => {
+          console.log(res.data)
+          setMessages(res.data)
+        })
     } catch (error) {
       if (error instanceof AxiosError) {
         setError('message', { message: error?.message })
@@ -24,10 +34,23 @@ export default function Message(props: IMessageProps) {
     }
   }
 
+
   return (
     <>
-      <button onClick={viewMessages}>View Messages</button>
-      {/*Anda god*/}
+      <div className="messages-container">
+        <div className="messages-items">
+          <button className="messages-btn" ></button>
+          {messages.map((message, index) => {
+            return (
+              <div key={index} className="message-item">
+                <h1 className="message-title">{message.content}</h1>
+                <h2 className="message-date">{message.updatedAt}</h2>
+              </div>
+            )
+          })
+          }
+        </div>
+      </div>
     </>
   );
 }

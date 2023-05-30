@@ -16,7 +16,7 @@ const Login = () => {
 
   async function LogInGoogle() {
     try {
-      await signIn("google", {callbackUrl: '/dashboard'}).then((res) => {
+      await signIn("google", { callbackUrl: '/dashboard' }).then((res) => {
         console.log(res?.error)
       }).catch((err) => console.log(err))
     } catch (error) {
@@ -37,14 +37,11 @@ const Login = () => {
           <input type="password" className='inputs' placeholder='Password' />
           <button className='btn'> Log In <AiFillCaretRight /></button>
         </form>
-          <Link className='link-register' href={"hola"}> Register </Link>
-
-          <button className="google-btn" onClick={LogInGoogle}>
-            <FcGoogle className='google-icon' />
-            <h3 className="btn-text">Continue with Google</h3>
-
-          </button>
-        
+        <Link className='link-register' href={"hola"}> Register </Link>
+        <button className="google-btn" onClick={LogInGoogle}>
+          <FcGoogle className='google-icon' />
+          <h3 className="btn-text">Continue with Google</h3>
+        </button>
       </div>
     </div>
   )
