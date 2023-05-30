@@ -7,8 +7,8 @@ export interface IDashboardProps { }
 export default function Dashboard(props: IDashboardProps) {
   return (
     <>
-      <Header />
-      <AddComment />
+        <Header />
+        <AddComment />
     </>
   );
 }

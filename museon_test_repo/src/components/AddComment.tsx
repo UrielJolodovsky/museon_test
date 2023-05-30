@@ -46,38 +46,18 @@ const AddComment = (props: IAddCommentProps) => {
   }
   
   return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        delay: 0.5,
-        ease: [0, 0.5, 0.2, 1]
-      }}
-      className='comment-container'>
-     <form className='form-comment' onSubmit={handleSubmit(MessageCargado)}>
-      <h2 className='title-comment'>Add a message</h2>
-      <input className='input-message' type="text" {...register("message" )} />
-      {errors.message && 
-        <motion.p 
-          initial={{ opacity: 0, scale: 0.5 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          transition={{
-            duration: 0.3,
-            delay: 0.2,
-            ease: [0, 0.5, 0.2, 1]
-          }}
-          className='error-message'>
-          {errors.message.message}</motion.p>}
-      <motion.button
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 1.1 }}
-          drag="x"
-          dragConstraints={{ left: -100, right: 100 }}
-          type='submit' 
-          className='btn-comment'>Send</motion.button>
-      </form>
-    </motion.div>
+    <div className='dashboard-body'>
+      <div className='comment-container'>
+        <h2 className='title-comment'>Add a message</h2>
+      <form className='form-comment' onSubmit={handleSubmit(MessageCargado)}>
+        <input className='input-message' type="text" {...register("message" )} />
+        {errors.message && 
+          <p className='error-message'>
+            {errors.message.message}</p>}
+            <button type='submit' className='btn-comment'>Send</button>
+        </form>
+      </div>
+    </div>
   );
 }
 
