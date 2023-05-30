@@ -9,8 +9,6 @@ import { FcGoogle } from "react-icons/fc"
 
 
 const Login = () => {
-  //const { data: sessionData, status } = useSession();
-  //const nombre = sessionData?.user ? sessionData?.user?.name : "";
 
   const router = useRouter()
 
@@ -22,10 +20,6 @@ const Login = () => {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  const handleIndex = () => {
-    window.location.href = '/'
   }
 
   return (

@@ -11,8 +11,7 @@ export default function Message(props: IMessageProps) {
 
   useEffect(() => {
     viewMessages()
-    console.log(messages)
-  }, [])
+  }, [messages])
 
   const { setError } = useForm()
 
@@ -43,8 +42,10 @@ export default function Message(props: IMessageProps) {
           {messages.map((message, index) => {
             return (
               <div key={index} className="message-item">
-                <h1 className="message-title">{message.content}</h1>
-                <h2 className="message-date">{message.updatedAt}</h2>
+                <div className="messages">
+                  <h1 className="message-title">{message.content}</h1>
+                  <h2 className="message-date">{message.updatedAt}</h2>
+                </div>
               </div>
             )
           })
