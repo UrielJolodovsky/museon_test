@@ -1,3 +1,4 @@
+"use client"
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -15,16 +16,13 @@ const Login = () => {
 
   async function LogInGoogle() {
     try {
-      await signIn("google").then((res) => {
+      await signIn("google", {callbackUrl: '/dashboard'}).then((res) => {
         console.log(res?.error)
-
       }).catch((err) => console.log(err))
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }
-
 
   const handleIndex = () => {
     window.location.href = '/'
@@ -35,16 +33,18 @@ const Login = () => {
       <div className="form-container">
         <form action="">
           <h1 className="login-title">Log In</h1>
-          <input type="email" className='inputs' placeholder='email address' />
-          <input type="password" className='inputs' placeholder='password' />
+          <input type="email" className='inputs' placeholder='Email address' />
+          <input type="password" className='inputs' placeholder='Password' />
           <button className='btn'> Log In <AiFillCaretRight /></button>
+        </form>
           <Link className='link-register' href={"hola"}> Register </Link>
 
           <button className="google-btn" onClick={LogInGoogle}>
             <FcGoogle className='google-icon' />
             <h3 className="btn-text">Continue with Google</h3>
+
           </button>
-        </form>
+        
       </div>
     </div>
   )
