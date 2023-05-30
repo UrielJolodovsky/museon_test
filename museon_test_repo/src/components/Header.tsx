@@ -5,12 +5,18 @@ import { FiLogOut } from "react-icons/fi";
 import { FiLogIn } from "react-icons/fi";
 import { HiHome } from "react-icons/hi";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export interface IHeaderProps {}
+export interface IHeaderProps { }
 
 export default function Header(props: IHeaderProps) {
   const { data: sessionData, status } = useSession();
   const nombre = sessionData?.user ? sessionData?.user?.name : "";
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push("/login")
+  }
 
   return (
     <div className="header-container">
@@ -32,16 +38,14 @@ export default function Header(props: IHeaderProps) {
               src={sessionData?.user?.image ?? "public/anonimo.jpg"}
               alt={sessionData?.user?.name ?? ""}
             />
-            <button className="logIn-button" onClick={() => void signOut()}>
+            <button className="logOut-button" onClick={() => void signOut()}>
               <FiLogOut />
             </button>
           </div>
         ) : (
           <button
-            className="logOut-button"
-            onClick={() =>
-              void signIn('google')
-            }
+            className="logIn-button"
+            onClick={handleLogin}
           >
             <FiLogIn />
           </button>

@@ -3,7 +3,7 @@ import React from 'react'
 const Inicio = () => {
 
   const handleClickButton = () => {
-    window.location.href = '/login'
+    window.location.href = '/dashboard'
   }
 
   return (

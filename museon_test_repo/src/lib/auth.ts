@@ -25,14 +25,14 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 }
-  const prisma = new PrismaClient()
+const prisma = new PrismaClient()
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/dashboard",
+    signIn: "/login",
   },
   providers: [
     GoogleProvider({
