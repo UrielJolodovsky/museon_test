@@ -2,12 +2,17 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MuseosProps } from "@/types";
+import { Router } from "next/router";
 
 export interface IGetMuseosProps { }
 
 export default function GetMuseos(props: IGetMuseosProps) {
 
   const [museos, setMuseos] = useState<MuseosProps[]>([])
+  
+  const handleClickButton = (id: any) => {
+    window.location.href = `/dashboard/${id}`
+  }
 
   useEffect(() => {
     viewMuseos()
