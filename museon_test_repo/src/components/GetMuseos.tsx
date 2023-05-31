@@ -43,6 +43,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
                   <button>
                   <h1 className="message-title">{museo.id}</h1>
                   <h2 className="message-date">{museo.name}</h2>
+                  {/* Use params */}
                   </button>
                 </div>
               </div>
