@@ -15,9 +15,7 @@ const Inicio = () => {
         <h2 className='start-subtitle'>
           Apreta aquí¡!!
         </h2>
-        <div className="btn-container">
           <button className='start-btn' onClick={handleClickButton}></button>
-        </div>
       </div>
     </div>
   )

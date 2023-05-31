@@ -5,3 +5,8 @@ export interface MessageProps {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ICardsProps { 
+  id: number,
+  title: string,
+}

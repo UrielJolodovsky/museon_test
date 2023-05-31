@@ -1,35 +1,38 @@
 .start-container{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #c1c1c1;
+    background-color: $background;
 
     .container-start-items{
-        width: 500px;
+        width: 800px;
         height: 600px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        gap: 4rem;
 
-        .btn-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 120px;
-            height: 70px;
-            background-color: #000;
-            border-radius: 5px;
+        .start-title{   
+            font-size: 62px;
+            font-weight: 700;
+            color: $text-color;
+        }
+        .start-subtitle{
+            font-size: 32px;
+            font-weight: 400;
+            color: $text-color;
+        }
 
             .start-btn{
-                width: 70px;
-                height: 40px;
+                width: 120px;
+                height: 60px;
                 border: none;
-                border-radius: 5px;
+                border-radius: 18px;
                 cursor: pointer;
             }
-        }
+        
     }
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "@/components/Header";
 import AddComment from "@/components/AddComment";
+import Cards from "@/components/Cards";
 
 export interface IDashboardProps { }
 
@@ -9,6 +10,7 @@ export default function Dashboard(props: IDashboardProps) {
     <>
         <Header />
         <AddComment />
+        <Cards/>
     </>
   );
 }
