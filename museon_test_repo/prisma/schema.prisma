@@ -64,14 +64,21 @@ model Comments {
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
   authorId  String
-  museoId String @unique
-  museos  Museos[]
   author  User @relation(fields: [authorId], references: [id])
+  commentsonmuseos CommentsOnMuseos[]
 }
 
 model Museos{
   id String @id @default(cuid())
   name String
-  message Comments @relation(fields: [id], references: [museoId])
+  commentsonmuseos CommentsOnMuseos[]
+}
+
+model CommentsOnMuseos {
+  id String @id @default(cuid())
+  CommentId String
+  comment Comments @relation(fields: [CommentId], references: [id])
+  MuseoId String
+  museos Museos @relation(fields: [MuseoId], references: [id])
 }
 
