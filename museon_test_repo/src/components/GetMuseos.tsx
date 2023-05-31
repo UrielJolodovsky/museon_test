@@ -40,15 +40,16 @@ export default function GetMuseos(props: IGetMuseosProps) {
             return (
               <div key={index} className="message-item">
                 <div className="messages">
+                  <button>
                   <h1 className="message-title">{museo.id}</h1>
                   <h2 className="message-date">{museo.name}</h2>
+                  </button>
                 </div>
               </div>
             )
           })
           }
      </div>
-     
      </>
     )
 
