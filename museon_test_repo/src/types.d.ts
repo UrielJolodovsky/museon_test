@@ -11,6 +11,7 @@ export interface ICardsProps {
   title: string,
 }
 export interface MuseosProps {
-  id: string;
-  name: string;
+  id: string
+  name: string
+  title: string
 }

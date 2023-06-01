@@ -36,12 +36,12 @@ export default function GetMuseos(props: IGetMuseosProps) {
   return (
      <>
      <div>
-     {museos.map((museo, index) => {
+     {museos.map(({id, name, title}) => {
             return (
-              <div key={index} className="message-item">
+              <div key={id} className="message-item">
                 <div className="messages">
-                  <h1 className="message-title">{museo.id}</h1>
-                  <h2 className="message-date">{museo.name}</h2>
+                  <h1 className="message-title">{title}</h1>
+                  <h2 className="message-date">{name}</h2>
                 </div>
               </div>
             )
