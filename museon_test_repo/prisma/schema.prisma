@@ -72,7 +72,6 @@ model Comments {
 model Museos{
   id String @id @default(cuid())
   name String
-  commentId String
   comments Comments[]
 }
 
