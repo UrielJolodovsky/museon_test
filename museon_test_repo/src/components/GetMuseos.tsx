@@ -13,7 +13,9 @@ export default function GetMuseos(props: IGetMuseosProps) {
   const router = useRouter()
   
   const handleClickButton = (id: any) => {
-    window.location.href = `/dashboard/?id=${id}`
+    const url = new URL(`http://localhost:3000/dashboard/${id}`)
+    console.log(url.toString())
+    router.push(url.toString())
   }
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
             return (
               <div key={index} className="message-item">
                 <div className="messages">
-                  <button onClick={() => router.push(`dashboard/?id=${museo.id}`)}>
+                  <button onClick={() => handleClickButton(museo.id)}>
                   <h1 className="message-title">{museo.id}</h1>
                   <h2 className="message-date">{museo.name}</h2>
                   {/* Use params */}

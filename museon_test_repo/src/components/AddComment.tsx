@@ -11,10 +11,11 @@ import { motion } from 'framer-motion';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-export interface IAddCommentProps {
+interface IAddCommentProps {
+  museoId: string
 }
 
-const AddComment = (props: IAddCommentProps) => {
+const AddComment = ({museoId}: IAddCommentProps) => {
   //const session = getServerSession(authOptions)
   //console.log(session)
   type FormData = z.infer<typeof MessageValidator>
@@ -25,7 +26,10 @@ const AddComment = (props: IAddCommentProps) => {
 
   const addMessage = async(message: string) => {
     try {
-      await axios.post('http://localhost:3000/api/comments/add', {message: message})
+      await axios.post('http://localhost:3000/api/comments/add', {
+        museoId: museoId,
+        message: message
+      })
       .then((res) => console.log(res))
       // .catch(err => console.log(err))
     } catch (error) {
