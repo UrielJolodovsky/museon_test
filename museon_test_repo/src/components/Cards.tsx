@@ -20,6 +20,10 @@ const Cards = () => {
         }])
     }
 
+    const removeCard = () => {
+        setCards(cards.slice(0, -1))
+    }
+
     return (
         <div className='cards-container'>
             <h1 className="cards-title">Agrega cards:</h1>
@@ -28,7 +32,7 @@ const Cards = () => {
                     <div key={id}>{title}</div>
                 ))}
                 <button onClick={() => addCard()}>Agregar Card</button>
-
+                <button onClick={() => removeCard()}>Sacar Card</button>
             </div>
 
         </div>
