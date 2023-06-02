@@ -1,3 +1,4 @@
+import AddComment from "@/components/AddComment";
 import Messages from "@/components/Messages";
 
 export interface ISlugMuseoProps { }
@@ -8,6 +9,7 @@ export default function GetMuseos(props: ISlugMuseoProps) {
 
         return (
             <>
+            <AddComment />
             <Messages />
             </>
         )

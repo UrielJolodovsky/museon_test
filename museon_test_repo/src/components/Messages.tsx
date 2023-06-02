@@ -19,7 +19,7 @@ export default function Message(props: IMessageProps) {
 
   const viewMessages = async () => {
     try {
-      await axios.get('http://localhost:3000/api/comments/get')
+      await axios.get('http://localhost:3000/api/comments/get/[slug]')
         .then((res) => {
           console.log(res.data)
           setMessages(res.data)

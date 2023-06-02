@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MuseosProps } from "@/types";
 import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 export interface IGetMuseosProps { }
 
 export default function GetMuseos(props: IGetMuseosProps) {
 
   const [museos, setMuseos] = useState<MuseosProps[]>([])
+  const router = useRouter()
   
   const handleClickButton = (id: any) => {
-    window.location.href = `/dashboard/${id}`
+    window.location.href = `/dashboard/?id=${id}`
   }
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
             return (
               <div key={index} className="message-item">
                 <div className="messages">
-                  <button onClick={() => handleClickButton(museo.id)}>
+                  <button onClick={() => router.push(`dashboard/?id=${museo.id}`)}>
                   <h1 className="message-title">{museo.id}</h1>
                   <h2 className="message-date">{museo.name}</h2>
                   {/* Use params */}

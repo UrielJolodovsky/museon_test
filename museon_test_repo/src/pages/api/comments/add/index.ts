@@ -1,16 +1,18 @@
 import { authOptions } from '@/lib/auth';
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type{ NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth/next';
 import { PrismaClient } from '@prisma/client';
 import { getSession } from 'next-auth/react';
-import { GetServerSideProps } from 'next';
 import { getToken } from 'next-auth/jwt';
+import { GetServerSideProps } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const prisma = new PrismaClient()
     // const session = await getSession({ req });
     // console.log(session)
+    const url = new URL(req.url!)
+    const id = url.searchParams.get("id")
 
     if (req.method === "POST") {
         try {
@@ -32,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     content: message,
                     authorId: session!.user.id,
+                    museumId: id!,
                 },
             });
             res.status(200).send({ message: "Add comment successfully" });

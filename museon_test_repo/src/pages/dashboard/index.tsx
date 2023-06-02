@@ -11,7 +11,6 @@ export default function Dashboard(props: IDashboardProps) {
     <>
         <Header />
         <GetMuseos />
-        <AddComment />
         <Cards/>
     </>
   );
