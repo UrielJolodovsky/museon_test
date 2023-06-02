@@ -47,11 +47,8 @@ export default function GetMuseos(props: IGetMuseosProps) {
             return (
               <div key={id} className="message-item">
                 <div className="messages">
-                  <button onClick={() => handleClickButton(museo.id)}>
-                  <h1 className="message-title">{museo.id}</h1>
-                  <h2 className="message-date">{museo.name}</h2>
-                  {/* Use params */}
-                  </button>
+                  <h1 className="message-title">{name}</h1>
+                  <h2 className="message-date">{title}</h2>
                 </div>
               </div>
             )
