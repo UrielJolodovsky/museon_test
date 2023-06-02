@@ -11,30 +11,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const prisma = new PrismaClient()
     // const session = await getSession({ req });
     // console.log(session)
-    const url = new URL(req.url!)
-    const id = url.searchParams.get("id")
 
     if (req.method === "POST") {
         try {
-            const { message } = req.body;
-            console.log(req.body)
+            const { museoId, message } = req.body;
+            console.log("body: ", req.body)
             const session = await getServerSession(req, res, authOptions);
             // const session: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
             console.log(session)
             // const session = await getSession({ req });
-            console.log("hi")
             if (message.length === 0) {
                 res.status(400).send({ message: "Please write a message" });
             }
             if (session?.user.id === undefined) {
                 res.status(401).send({ message: "You are not logged in" });
-                console.log("bye")
             }
             const newmessage = await prisma.comments.create({
                 data: {
                     content: message,
                     authorId: session!.user.id,
-                    museumId: id!,
+                    museumId: museoId,
                 },
             });
             res.status(200).send({ message: "Add comment successfully" });
