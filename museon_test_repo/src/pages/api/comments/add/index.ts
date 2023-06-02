@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     content: message,
                     authorId: session!.user.id,
-                    museoId: "1"
                 },
             });
             res.status(200).send({ message: "Add comment successfully" });

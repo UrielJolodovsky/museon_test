@@ -2,12 +2,14 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MessageProps } from "@/types";
+import { useSession } from "next-auth/react";
 
 export interface IMessageProps { }
 
 export default function Message(props: IMessageProps) {
 
   const [messages, setMessages] = useState<MessageProps[]>([])
+  const { data: sessionData, status } = useSession();
 
   useEffect(() => {
     viewMessages()
@@ -17,8 +19,7 @@ export default function Message(props: IMessageProps) {
 
   const viewMessages = async () => {
     try {
-
-      await axios.get('api/comments/get')
+      await axios.get('http://localhost:3000/api/comments/get')
         .then((res) => {
           console.log(res.data)
           setMessages(res.data)
