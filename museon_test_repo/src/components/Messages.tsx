@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import { MessageProps } from "@/types";
 import { useSession } from "next-auth/react";
 
-export interface IMessageProps { }
+export interface IMessageProps { 
+  museoId: string
+}
 
-export default function Message(props: IMessageProps) {
+export default function Message({museoId}: IMessageProps) {
 
   const [messages, setMessages] = useState<MessageProps[]>([])
   const { data: sessionData, status } = useSession();
@@ -19,7 +21,11 @@ export default function Message(props: IMessageProps) {
 
   const viewMessages = async () => {
     try {
-      await axios.get('http://localhost:3000/api/comments/get/[slug]')
+      await axios.get('http://localhost:3000/api/comments/get', {
+        params: {
+          museoId: museoId
+        }
+      })
         .then((res) => {
           console.log(res.data)
           setMessages(res.data)
@@ -34,6 +40,7 @@ export default function Message(props: IMessageProps) {
     }
   }
 
+viewMessages()
 
   return (
     <>

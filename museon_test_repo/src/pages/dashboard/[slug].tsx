@@ -15,7 +15,7 @@ export default function GetMuseos(props: ISlugMuseoProps) {
     return (
         <>
             <AddComment museoId={museoId} />
-            <Messages />
+            <Messages museoId={museoId}/>
         </>
     )
 }
