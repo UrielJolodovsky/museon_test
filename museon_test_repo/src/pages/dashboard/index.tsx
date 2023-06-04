@@ -9,9 +9,10 @@ export interface IDashboardProps { }
 export default function Dashboard(props: IDashboardProps) {
   return (
     <>
-        <Header />
+      <Header />
+      <div className="container-dash-comp">
         <GetMuseos />
-        <Cards/>
+      </div>
     </>
   );
 }

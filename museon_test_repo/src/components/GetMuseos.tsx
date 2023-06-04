@@ -11,7 +11,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
 
   const [museos, setMuseos] = useState<MuseosProps[]>([])
   const router = useRouter()
-  
+
   const handleClickButton = (id: any) => {
     const url = new URL(`http://localhost:3000/dashboard/${id}`)
     console.log(url.toString())
@@ -43,24 +43,24 @@ export default function GetMuseos(props: IGetMuseosProps) {
   }
 
   return (
-     <>
-     <div>
-     {museos.map(({id, name, title}) => {
-            return (
-              <div key={id} className="message-item">
-                <div className="messages">
-                  <button onClick={() => handleClickButton(id)}>
-                  <h1 className="message-title">{title}</h1>
-                  <h2 className="message-date">{name}</h2>
-                  {/* Use params */}
-                  </button>
-                </div>
+    <>
+      <div className="museo-container">
+        {museos.map(({ id, name }) => {
+          return (
+            <div key={id} className="museo-item">
+              <div className="museos">
+                <button className="museos-btn" onClick={() => handleClickButton(id)}>
+                  <h2 className="museos-name">{name}
+                    <div className="line"></div>
+                  </h2>
+                </button>
               </div>
-            )
-          })
-          }
-     </div>
-     </>
-    )
+            </div>
+          )
+        })
+        }
+      </div>
+    </>
+  )
 
 }

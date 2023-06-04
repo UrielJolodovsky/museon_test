@@ -1,30 +1,78 @@
-.dashboard-body{
+.dashboard-body {
     width: 100%;
     height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
     background-color: $form-back;
 
-    .comment-container{
-        width: 450px;
-        height: 450px;
+    .comment-container {
+        width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap:2rem;
 
-        .title-comment{
-            font-size: 32px;
-            font-weight: 700;
-            color: $text-color;
-        }
-        .form-comment{
-            width: 100%;
+        .form-comment {
+            width: 450px;
+            height: 450px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
+            text-align: center;
+            gap: 2rem;
+
+            .title-comment {
+                font-size: 32px;
+                font-weight: 700;
+                color: $text-color;
+            }
+
+            .send-message {
+                width: 400px;
+                height: 100px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 1rem;
+
+                .input-message {
+                    width: 225px;
+                    height: 42px;
+                    padding: 10px;
+                    background-color: transparent;
+                    border: 3px solid $text-color;
+                    border-radius: 15px;
+                    font-size: 18px;
+                    color: $text-color;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .btn-comment {
+                    width: 120px;
+                    height: 42px;
+                    font-size: 18px;
+                    font-weight: 500;
+                    border: 3px solid $text-color;
+                    border-radius: 15px;
+                    background-color: transparent;
+                    color: $text-color;
+                    cursor: pointer;
+                    transition: .4s all ease;
+
+                    &:hover {
+                        background-color: $text-color;
+                        color: $form-back;
+                        transition: .4s all ease;
+                    }
+                }
+            }
         }
     }
 }

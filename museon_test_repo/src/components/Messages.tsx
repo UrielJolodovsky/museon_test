@@ -4,14 +4,13 @@ import { useForm } from "react-hook-form";
 import { MessageProps } from "@/types";
 import { useSession } from "next-auth/react";
 
-export interface IMessageProps { 
+export interface IMessageProps {
   museoId: string
 }
 
-export default function Message({museoId}: IMessageProps) {
+export default function Message({ museoId }: IMessageProps) {
 
   const [messages, setMessages] = useState<MessageProps[]>([])
-  const { data: sessionData, status } = useSession();
 
   useEffect(() => {
     viewMessages()
@@ -21,15 +20,14 @@ export default function Message({museoId}: IMessageProps) {
 
   const viewMessages = async () => {
     try {
-      await axios.get('http://localhost:3000/api/comments/get', {
+      const response = await axios.get('http://localhost:3000/api/comments/get', {
         params: {
-          museoId: museoId
+          museoId: museoId,
         }
-      })
-        .then((res) => {
-          console.log(res.data)
-          setMessages(res.data)
-        })
+      });
+      const reversedMessages = response.data.reverse(); // Invierte el orden de los mensajes
+      setMessages(reversedMessages);// Invierte el orden de los mensajes
+
     } catch (error) {
       if (error instanceof AxiosError) {
         setError('message', { message: error?.message })
@@ -40,19 +38,19 @@ export default function Message({museoId}: IMessageProps) {
     }
   }
 
-viewMessages()
+
 
   return (
     <>
       <div className="messages-container">
+        <h1 className="m-title">Messages</h1>
         <div className="messages-items">
-          <button className="messages-btn" ></button>
           {messages.map((message, index) => {
             return (
-              <div key={index} className="message-item">
-                <div className="messages">
-                  <h1 className="message-title">{message.content}</h1>
-                  <h2 className="message-date">{message.updatedAt}</h2>
+              <div className="message-item">
+                <div key={index} className="messages">
+                  <h2 className="message-title">{message.content}</h2>
+                  <h3 className="message-date">{message.updatedAt}</h3>
                 </div>
               </div>
             )

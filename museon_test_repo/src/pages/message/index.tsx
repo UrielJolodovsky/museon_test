@@ -6,7 +6,7 @@ export interface IMessageProps { }
 export default function Message(props: IMessageProps) {
   return (
     <>
-      <Messages/>
+
     </>
   );
 }

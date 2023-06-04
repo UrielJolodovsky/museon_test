@@ -9,13 +9,13 @@ export default function GetMuseos(props: ISlugMuseoProps) {
     const router = useRouter()
 
     const { slug } = router.query
-    const museoId = slug!.toString()
-    console.log(slug)
+    //const museoId = slug!.toString()
+    console.log(slug, router.query)
+
 
     return (
         <>
-            <AddComment museoId={museoId} />
-            <Messages museoId={museoId}/>
+            <AddComment museoId={""} />
         </>
     )
 }
