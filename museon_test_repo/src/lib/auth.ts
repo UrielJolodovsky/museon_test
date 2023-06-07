@@ -1,17 +1,28 @@
 import { DefaultSession, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook"
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "next-auth/providers/credentials";
+import { compare } from "bcrypt"
 
 function getGoogleCredentials() {
-  const clientId = "485883197597-47j16obop0g2cdqvd8mntll7tsb0jl2o.apps.googleusercontent.com"
-  //process.env.GOOGLE_CLIENT_ID as string;
-  const clientSecret = "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"
-  //process.env.GOOGLE_CLIENT_SECRET as string;
+  const clientId = process.env.GOOGLE_CLIENT_ID as string;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET as string;
 
   if (!clientId || !clientSecret || clientId.length === 0 || clientSecret.length === 0) {
     throw new Error("Missing Google credentials");
+  }
+  console.log("Good Credentials")
+  return { clientId, clientSecret };
+}
+
+function getFacebookCredentials() {
+  const clientId = process.env.FACEBOOK_CLIENT_ID as string;
+  const clientSecret = process.env.FACEBOOK_CLIENT_SECRET as string;
+
+  if (!clientId || !clientSecret || clientId.length === 0 || clientSecret.length === 0) {
+    throw new Error("Missing Facebook credentials");
   }
   console.log("Good Credentials")
   return { clientId, clientSecret };
@@ -40,21 +51,44 @@ export const authOptions: NextAuthOptions = {
       clientId: getGoogleCredentials().clientId,
       clientSecret: getGoogleCredentials().clientSecret,
     }),
-    // CredentialsProvider({
-    //   name: "Credentials",
-    //   credentials: {
-    //     username: { label: "Username", type: "text", placeholder: "jsmith" },
-    //     password: { label: "Password", type: "password" },
-    //   },
-    //   async authorize(credentials, req) {
-    //     const user = { id: 1, name: "J Smith", email: "" };
-    //     if (user) {
-    //       return user;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    // }),
+    FacebookProvider({
+      clientId: getFacebookCredentials().clientId,
+      clientSecret: getFacebookCredentials().clientSecret
+    }),
+    Credentials({
+      id: "credentials",
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+        },
+        password: {
+          label: "password",
+          type: "password"
+        }
+      },
+      async authorize(credentials, req) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Email and password required")
+        }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email
+          }
+        })
+        if (!user || !user.hashedPassword) {
+          throw new Error("Email doesn't exist")
+        }
+
+        const isCorrectPassword = await compare(credentials.password, user.hashedPassword)
+        if (!isCorrectPassword) {
+          throw new Error("Password is incorrect")
+        }
+        return user
+      }
+    })
   ],
   callbacks: {
     session({ session, token }) {
