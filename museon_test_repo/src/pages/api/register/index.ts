@@ -11,7 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "POST") {
     try {
         const { email, name, password } = req.body;
-
+        if (email.length === 0 || name.length === 0 || password.length === 0) {
+            return res.status(400).json({ error: "Please fill all the fields" })
+        }
         const existingUser = await prisma.user.findUnique({
             where: {
                 email: email
@@ -30,6 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 hashedPassword: hashedPassword
             }
         })
+        return res.status(200).json({ message: "User created successfully" })
 
     } catch (error) {
         return res.status(400).json({ error: error })

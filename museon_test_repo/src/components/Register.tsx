@@ -31,14 +31,17 @@ const Register = () => {
       console.log(error)
     }
   }  
-
-  const UserCargado = (data: FormData) => {
+  async function UserCargado() {
     console.log("S")
-    AddUser(data.email, data.name, data.password)
+    AddUser(email, name, password)
   }
+  // const UserCargado = (data: FormData) => {
+  //   console.log("S")
+  //   AddUser(data.email, data.name, data.password)
+  // }
 
     return (
-    <form onSubmit={handleSubmit(UserCargado)} >
+    <form >
     <input
     id='Email' 
     type="text" 
@@ -57,7 +60,7 @@ const Register = () => {
     onChange={(ev: any) => setPassword(ev.target.value)}
     value={password}
     />
-    <button type='submit'>Mandar</button>
+    <button onClick={UserCargado} type='submit'>Mandar</button>
     </form>
   )
 
