@@ -32,7 +32,8 @@ const Login = () => {
       console.log(error)
     }
   }
-  async function LogInCredentials() {
+  async function LogInCredentials(e: any) {
+    e.preventDefault()
     try {
       await signIn("credentials", { 
         email,
@@ -53,7 +54,7 @@ const Login = () => {
           <h1 className="login-title">Log In</h1>
           <input onChange={(ev: any) => setEmail(ev.target.value)} type="email" className='inputs' placeholder='Email address' />
           <input onChange={(ev: any) => setPassword(ev.target.value)} type="password" className='inputs' placeholder='Password' />
-          <button type='submit' className='btn'> Log In <AiFillCaretRight /></button>
+          <button type='submit' className='btn' onClick={() => console.log(`${email} y ${password!}`)}> Log In <AiFillCaretRight /></button>
         </form>
         <Link className='link-register' href={'http://localhost:3000/register'}> Register </Link>
         <button className="google-btn" onClick={LogInGoogle}>

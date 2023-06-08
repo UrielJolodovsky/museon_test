@@ -35,7 +35,7 @@ export default function Header(props: IHeaderProps) {
               className="user-image"
               width={50}
               height={50}
-              src={sessionData?.user?.image ?? "public/anonimo.jpg"}
+              src={sessionData?.user?.image ?? "public/next.svg"}
               alt={sessionData?.user?.name ?? ""}
             />
             <button className="logOut-button" onClick={() => void signOut()}>

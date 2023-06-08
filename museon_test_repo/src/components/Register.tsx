@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios, { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 export interface IRegisterProps { 
     label: string
@@ -18,50 +19,51 @@ const Register = () => {
   const {handleSubmit, setError, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(RegisterValidator)
   })
-  const AddUser = async (email: string, name: string, password: string) => {
-    console.log("I")
+  const router = useRouter()
+  const AddUser = async (e: any) => {
+    e.preventDefault()
     try {
-      console.log("A")
       await axios.post('http://localhost:3000/api/register', {
         email: email,
         name: name,
         password: password
-      }).then((res) => console.log(res))
+      }).then((res) => {
+        console.log(res.data)
+        router.push("/dashboard")
+      }).catch((err) => {
+        console.log(err)
+      })
     } catch(error) {
       console.log(error)
     }
   }  
-  async function UserCargado() {
-    console.log("S")
-    AddUser(email, name, password)
-  }
   // const UserCargado = (data: FormData) => {
   //   console.log("S")
   //   AddUser(data.email, data.name, data.password)
   // }
 
     return (
-    <form >
-    <input
-    id='Email' 
-    type="text" 
-    onChange={(ev: any) => setEmail(ev.target.value)}
-    value={email}
-    />
-    <input
-    id='Name' 
-    type="text" 
-    onChange={(ev: any) => setName(ev.target.value)}
-    value={name}
-    />
-    <input 
-    type="password" 
-    id='Password'
-    onChange={(ev: any) => setPassword(ev.target.value)}
-    value={password}
-    />
-    <button onClick={UserCargado} type='submit'>Mandar</button>
-    </form>
+      <form method='post' onSubmit={AddUser}>
+        <input
+        id='Email' 
+        type="text" 
+        onChange={(ev: any) => setEmail(ev.target.value)}
+        value={email}
+        />
+        <input
+        id='Name' 
+        type="text" 
+        onChange={(ev: any) => setName(ev.target.value)}
+        value={name}
+        />
+        <input 
+        type="password" 
+        id='Password'
+        onChange={(ev: any) => setPassword(ev.target.value)}
+        value={password}
+        />
+        <button type='submit'>Mandar</button>
+      </form>
   )
 
 }
