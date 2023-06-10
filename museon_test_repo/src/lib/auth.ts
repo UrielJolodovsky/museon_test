@@ -7,10 +7,8 @@ import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcrypt"
 
 function getGoogleCredentials() {
-  const clientId = "485883197597-47j16obop0g2cdqvd8mntll7tsb0jl2o.apps.googleusercontent.com"
-  //process.env.GOOGLE_CLIENT_ID as string;
-  const clientSecret = "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"
-  //process.env.GOOGLE_CLIENT_SECRET as string;
+  const clientId = process.env.GOOGLE_CLIENT_ID as string;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET as string;
 
   if (!clientId || !clientSecret || clientId.length === 0 || clientSecret.length === 0) {
     throw new Error("Missing Google credentials");
@@ -58,7 +56,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: getFacebookCredentials().clientSecret
     }),
     Credentials({
-      id: "credentials",
+      //id: "credentials",
       name: "credentials",
       credentials: {
         email: {
