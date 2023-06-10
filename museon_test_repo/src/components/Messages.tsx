@@ -20,7 +20,7 @@ export default function Message({ museoId }: IMessageProps) {
 
   const viewMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/comments/get', {
+      const response = await axios.get('https://museon-test.vercel.app/api/comments/get', {
         params: {
           museoId: museoId,
         }

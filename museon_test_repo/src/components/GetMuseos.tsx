@@ -13,7 +13,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
   const router = useRouter()
 
   const handleClickButton = (id: any) => {
-    const url = new URL(`http://localhost:3000/dashboard/${id}`)
+    const url = new URL(`https://museon-test.vercel.app/dashboard/${id}`)
     console.log(url.toString())
     router.push(url.toString())
   }
@@ -27,7 +27,7 @@ export default function GetMuseos(props: IGetMuseosProps) {
   const viewMuseos = async () => {
     try {
 
-      await axios.get('api/museos')
+      await axios.get('https://museon-test.vercel.app/api/museos')
         .then((res) => {
           console.log(res.data)
           setMuseos(res.data)

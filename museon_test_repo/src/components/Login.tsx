@@ -56,7 +56,7 @@ const Login = () => {
           <input onChange={(ev: any) => setPassword(ev.target.value)} type="password" className='inputs' placeholder='Password' />
           <button type='submit' className='btn' onClick={() => console.log(`${email} y ${password!}`)}> Log In <AiFillCaretRight /></button>
         </form>
-        <Link className='link-register' href={'http://localhost:3000/register'}> Register </Link>
+        <Link className='link-register' href={'https://museon-test.vercel.app/register'}> Register </Link>
         <button className="google-btn" onClick={LogInGoogle}>
           <FcGoogle className='google-icon' />
           <h3 className="btn-text">Continue with Google</h3>

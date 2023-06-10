@@ -23,7 +23,7 @@ const Register = () => {
   const AddUser = async (e: any) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:3000/api/register', {
+      await axios.post('https://museon-test.vercel.app/api/register', {
         email: email,
         name: name,
         password: password

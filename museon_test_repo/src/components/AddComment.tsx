@@ -27,7 +27,7 @@ const AddComment = ({ museoId }: IAddCommentProps) => {
 
   const addMessage = async (message: string) => {
     try {
-      await axios.post('http://localhost:3000/api/comments/add', {
+      await axios.post('https://museon-test.vercel.app/api/comments/add', {
         museoId: museoId,
         message: message
       })
